@@ -21,4 +21,3 @@ int main(int argc, const char * argv[]) {
     else cout<<-1<<endl;
     return 0;
 }
-

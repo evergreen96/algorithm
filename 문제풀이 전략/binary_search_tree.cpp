@@ -1,5 +1,4 @@
 #include <iostream>
-
 struct Node
 {
     int key;
@@ -93,6 +92,18 @@ void deletetion(int num)
         p->right = c;
 }
 
+void travel(Node *root)
+{
+    travel(root->left);
+    std::cout << root->key << std::endl;
+    travel(root->right);
+}
+
 int main()
 {
+    initialize();
+    insert(5);
+    insert(3);
+    insert(6);
+    travel(head->right);
 }

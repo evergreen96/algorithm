@@ -1,4 +1,7 @@
 // 이진 탐색 트리
+
+
+//시간 초과
 #include <iostream>
 using namespace std;
 
@@ -19,10 +22,10 @@ int main()
     int num;
     Node *root = new Node;
     int count = 0;
-    for(int i=0; i<loop; i++)
+    for(int i=0; i<loop; i+    +)
     {
-        cin >> num;
-       // if(i !=0) count++;
+        c>> num;
+       // if(i !=0)            ;
         insert(count, num, root);
     }
 }
@@ -46,26 +49,11 @@ void insert(int &count, int num, Node *node)
 
         }
         
-        else
-        {        count++;
-            insert(count, num, node->left);
+        els    ins(                  t);
+         {        (n  ULL)
+        {
+                     temp->nu         node->ri                    count++;         cout<<co                  
+ e        de->right);
         }
     }
-    else
-    {
-        if (node->right == NULL)
-        {
-            Node *temp = new Node;
-            temp->num = num;
-            node->right = temp;
-            count++;
-            cout<<count<<endl;
-           
-        }
-        else
-        {
-            count++;
-            insert(count, num, node->right);
-        }
-    }
-}
+}     

@@ -32,7 +32,7 @@ int main() {
       node[i].loc = -node[i].loc + T;
       if (node[i].loc < 0) {
         // do not
-          node[i].loc = -node[i].loc;
+        node[i].loc = -node[i].loc;
       } else {
         int a = node[i].loc / N;
         int b = node[i].loc % N;

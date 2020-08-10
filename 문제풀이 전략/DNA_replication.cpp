@@ -41,6 +41,6 @@ int main() {
       }
       cout << endl;
     }
-      cout<<split<<endl;
+    cout << split << endl;
   }
 }

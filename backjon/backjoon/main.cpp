@@ -1,41 +1,16 @@
-    #include <iostream>
-    using namespace std;
-
-    int main() {
-      int A, B;
-      cin >> A >> B;
-      int* arr = new int[A];
-      for (int i = 0; i < A; i++) {
-        cin >> arr[i];
-      }
-      int min = A + 1;
-      int total = 0;
-      int count = 0;
-      int start = 0;
-      int flag = false;
-      for (int i = 0; i < A; i++) {
-        total += arr[i];
-        if (total < B) {
-          continue;
-        } else {
-          flag = true;
-          count = i - start + 1;
-          if (min > count) {
-            min = count;
-          }
-          while (total >= B) {
-            total -= arr[start++];
-            count--;
-            if (total >= B) {
-              if (min > count) {
-                min = count;
-              }
-            }
-          }
+    #include <cstdio>
+    int cnt[16], n;
+    int main(){
+        cnt[0] = 1, cnt[1] = 3;
+        scanf("%d", &n);
+        if(n%2){
+            printf("0");
+            return 0;
         }
-      }
-      if (!flag)
-        cout << 0 << endl;
-      else
-        cout << min << endl;
+        n /= 2;
+        for(int i = 2; i <= n; i++){
+            cnt[i] = cnt[i-1]*3;
+            for(int j = 2; i >= j; j++)cnt[i]+= cnt[i-j]*2;
+        }
+        printf("%d", cnt[n]);
     }

@@ -1,16 +1,32 @@
-    #include <cstdio>
-    int cnt[16], n;
-    int main(){
-        cnt[0] = 1, cnt[1] = 3;
-        scanf("%d", &n);
-        if(n%2){
-            printf("0");
-            return 0;
+    #include <iostream>
+    #include <vector>
+    using namespace std;
+
+    int main() {
+      int N;
+      cin >> N;
+
+      int* arr1 = new int[N + 1];
+      int* arr2 = new int[N + 1];
+      arr1[0] = arr2[0] = 0;
+      for (int i = 1; i <= N; i++) {
+        cin >> arr1[i] >> arr2[i];
+      }
+
+      int po;
+      for (int i = 0; i < N;) {
+        double max = -999;
+          double ratio;
+        for (int j = i + 1; j <= N; j++) {
+           ratio = (double)(arr2[j] - arr2[i]) / (double)(arr1[j] - arr1[i]);
+           
+          if (ratio > max) {
+            max = ratio;
+            po = j;
+          }
         }
-        n /= 2;
-        for(int i = 2; i <= n; i++){
-            cnt[i] = cnt[i-1]*3;
-            for(int j = 2; i >= j; j++)cnt[i]+= cnt[i-j]*2;
-        }
-        printf("%d", cnt[n]);
+          //cout<<max;
+        i = po;
+        cout << i << endl;
+      }
     }

@@ -13,7 +13,7 @@ int main() {
     bool flag = false;
     for (int i = 1; i < len; i++) {
       for (int j = 0; j + i < len; j++) {
-        int k = i;
+        int k = i; //반복이 되는지 안되는지 길이만큼 확인해야 한다.
         while (k--) {
           if (input[j] == input[j + i]) {
             flag = true;

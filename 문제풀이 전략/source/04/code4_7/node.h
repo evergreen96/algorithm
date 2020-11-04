@@ -8,9 +8,9 @@
 #define FALSE 0
 
 typedef struct _NODE {
-	char Data;
-	struct _NODE *Left;
-	struct _NODE *Right;
+  char Data;
+  struct _NODE* Left;
+  struct _NODE* Right;
 } NODE;
 NODE *HeadNode, *EndNode;
 

@@ -1,147 +1,136 @@
 #include "node.h"
-
-// ¿ÜºÎ ÇÔ¼ö Á¤ÀÇ
+#include <stack>
+// ï¿½Üºï¿½ ï¿½Ô¼ï¿½ ï¿½ï¿½ï¿½ï¿½
 extern void InitializeStack(void);
-extern void Push(NODE *);
-extern NODE *Pop(void);
+extern void Push(NODE*);
+extern NODE* Pop(void);
 extern int IsStackEmpty(void);
 
-// ³»ºÎ ÇÔ¼ö Á¤ÀÇ
+// ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½ ï¿½ï¿½ï¿½ï¿½
 void InitializeTree(void);
 void MakeTree(void);
-void Recursive_Traverse(NODE *);
-void Stack_Traverse(NODE *);
-void Visit(NODE *);
+void Recursive_Traverse(NODE*);
+void Stack_Traverse(NODE*);
+void Visit(NODE*);
 
-// Àü¿ª º¯¼ö Á¤ÀÇ
+// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 NODE *Parent, *LeftChild, *RightChild, *HeadNode, *EndNode;
 
-// Æ®¸®ÀÇ ÃÊ±âÈ­
-void InitializeTree(void)
-{
-	HeadNode = (NODE *)malloc(sizeof(NODE));
-	EndNode = (NODE *)malloc(sizeof(NODE));
+// Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
+void InitializeTree(void) {
+  HeadNode = (NODE*)malloc(sizeof(NODE));
+  EndNode = (NODE*)malloc(sizeof(NODE));
 
-	HeadNode->Left = EndNode;
-	HeadNode->Right = EndNode;
+  HeadNode->Left = EndNode;
+  HeadNode->Right = EndNode;
 
-	EndNode->Left = EndNode;
-	EndNode->Right = EndNode;
+  EndNode->Left = EndNode;
+  EndNode->Right = EndNode;
 }
 
-// Æ®¸®ÀÇ ÃÊ±â ±¸¼º
-void MakeTree(void)
-{
-	Parent = (NODE *)malloc(sizeof(NODE));
-	Parent->Data = 'A';
+// Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½ ï¿½ï¿½ï¿½ï¿½
+void MakeTree(void) {
+  Parent = (NODE*)malloc(sizeof(NODE));
+  Parent->Data = 'A';
 
-	LeftChild = (NODE *)malloc(sizeof(NODE));
-	LeftChild->Data = 'B';
+  LeftChild = (NODE*)malloc(sizeof(NODE));
+  LeftChild->Data = 'B';
 
-	RightChild = (NODE *)malloc(sizeof(NODE));
-	RightChild->Data = 'C';
+  RightChild = (NODE*)malloc(sizeof(NODE));
+  RightChild->Data = 'C';
 
-	Parent->Left = LeftChild;
-	Parent->Right = RightChild;
+  Parent->Left = LeftChild;
+  Parent->Right = RightChild;
 
-	HeadNode->Left = Parent;
-	HeadNode->Right = Parent;
+  HeadNode->Left = Parent;
+  HeadNode->Right = Parent;
 
-	Parent = Parent->Left;
+  Parent = Parent->Left;
 
-	LeftChild = (NODE *)malloc(sizeof(NODE));
-	LeftChild->Data = 'D';
-	LeftChild->Left = EndNode;
-	LeftChild->Right = EndNode;
+  LeftChild = (NODE*)malloc(sizeof(NODE));
+  LeftChild->Data = 'D';
+  LeftChild->Left = EndNode;
+  LeftChild->Right = EndNode;
 
-	RightChild = (NODE *)malloc(sizeof(NODE));
-	RightChild->Data = 'E';
-	RightChild->Left = EndNode;
-	RightChild->Right = EndNode;
+  RightChild = (NODE*)malloc(sizeof(NODE));
+  RightChild->Data = 'E';
+  RightChild->Left = EndNode;
+  RightChild->Right = EndNode;
 
-	Parent->Left = LeftChild;
-	Parent->Right = RightChild;
-	Parent = HeadNode->Right->Right;
+  Parent->Left = LeftChild;
+  Parent->Right = RightChild;
+  Parent = HeadNode->Right->Right;
 
-	LeftChild = (NODE *)malloc(sizeof(NODE));
-	LeftChild->Data = 'F';
-	LeftChild->Left = EndNode;
-	LeftChild->Right = EndNode;
+  LeftChild = (NODE*)malloc(sizeof(NODE));
+  LeftChild->Data = 'F';
+  LeftChild->Left = EndNode;
+  LeftChild->Right = EndNode;
 
-	RightChild = (NODE *)malloc(sizeof(NODE));
-	RightChild->Data = 'G';
-	RightChild->Left = EndNode;
-	RightChild->Right = EndNode;
+  RightChild = (NODE*)malloc(sizeof(NODE));
+  RightChild->Data = 'G';
+  RightChild->Left = EndNode;
+  RightChild->Right = EndNode;
 
-	Parent->Left = LeftChild;
-	Parent->Right = RightChild;
+  Parent->Left = LeftChild;
+  Parent->Right = RightChild;
 }
 
-// Àç±Í È£ÃâÀ» »ç¿ëÇÑ Æ®¸®ÀÇ ¼øÈ¸ ¾Ë°í¸®Áò
-void Recursive_Traverse(NODE *ptrNode)
-{
-	if (ptrNode != EndNode) {
-		Recursive_Traverse(ptrNode->Left);
-		Recursive_Traverse(ptrNode->Right);
-		Visit(ptrNode);
-	}
+// ï¿½ï¿½ï¿½ È£ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸ ï¿½Ë°ï¿½ï¿½ï¿½ï¿½ï¿½
+void Recursive_Traverse(NODE* ptrNode) {
+  if (ptrNode != EndNode) {
+    Recursive_Traverse(ptrNode->Left);
+    Recursive_Traverse(ptrNode->Right);
+    Visit(ptrNode);
+  }
 }
 
-// ½ºÅÃÀ» »ç¿ëÇÑ Æ®¸®ÀÇ ¼øÈ¸ ¾Ë°í¸®Áò
-void Stack_Traverse(NODE *ptrNode)
-{
-	int Finish = 0;
-	NODE *ptrVisited = EndNode;
-	NODE *ptrPushed = EndNode;
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸ ï¿½Ë°ï¿½ï¿½ï¿½ï¿½ï¿½
+void Stack_Traverse(NODE* ptrNode) {
+  int Finish = 0;
+  NODE* ptrVisited = EndNode;
+  NODE* ptrPushed = EndNode;
 
-	do{
-		while (ptrNode != EndNode && ptrNode != ptrVisited) {
-			if (ptrNode != ptrPushed)
-				Push(ptrNode);
+  do {
+    while (ptrNode != EndNode && ptrNode != ptrVisited) {
+      if (ptrNode != ptrPushed)
+        Push(ptrNode);
 
-			if (ptrNode->Right != EndNode)
-				Push(ptrNode->Right);
+      if (ptrNode->Right != EndNode)
+        Push(ptrNode->Right);
 
-			if (ptrNode->Left != EndNode)
-				Push(ptrNode->Left);
+      if (ptrNode->Left != EndNode)
+        Push(ptrNode->Left);
 
-			ptrPushed = ptrNode->Left;
-			ptrNode = ptrNode->Left;
-		}
+      ptrPushed = ptrNode->Left;
+      ptrNode = ptrNode->Left;
+    }
 
-		if (!IsStackEmpty()){
-			ptrNode = Pop();
+    if (!IsStackEmpty()) {
+      ptrNode = Pop();
 
-			if (ptrNode->Left != EndNode && ptrNode->Right == EndNode &&
-				ptrNode->Left != ptrVisited) {
-				Push(ptrNode);
-				ptrNode = ptrNode->Left;
-			}
+      if (ptrNode->Left != EndNode && ptrNode->Right == EndNode &&
+          ptrNode->Left != ptrVisited) {
+        Push(ptrNode);
+        ptrNode = ptrNode->Left;
+      }
 
-			if (ptrNode->Right == EndNode || ptrNode->Right == ptrVisited) {
-				Visit(ptrNode);
-				ptrVisited = ptrNode;
-			}
-		}
-		else
-			Finish = 1;
-	} while (!Finish);
+      if (ptrNode->Right == EndNode || ptrNode->Right == ptrVisited) {
+        Visit(ptrNode);
+        ptrVisited = ptrNode;
+      }
+    } else
+      Finish = 1;
+  } while (!Finish);
 }
 
-void Visit(NODE *ptrNode)
-{
-	printf("%2c -> ", ptrNode->Data);
-}
+void Visit(NODE* ptrNode) { printf("%2c -> ", ptrNode->Data); }
 
-void main()
-{
-	InitializeStack();  // ½ºÅÃÀÇ ÃÊ±âÈ­
-	InitializeTree();  // Æ®¸®ÀÇ ÃÊ±âÈ­
-	MakeTree();  // Æ®¸®ÀÇ ±¸¼º
-	printf("Àç±Í È£ÃâÀ» »ç¿ëÇÑ ÈÄÀ§ ¼øÈ¸ : ");
+int main() {
+  InitializeStack(); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
+  InitializeTree();  // Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
+  MakeTree();        // Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-	Recursive_Traverse(HeadNode->Left);  // Àç±Í È£Ãâ·Î Æ®¸®ÀÇ ¼øÈ¯
-	printf("\n½ºÅÃÀ» »ç¿ëÇÑ ÈÄÀ§ ¼øÈ¸ : ");
+  Recursive_Traverse(HeadNode->Left); // ï¿½ï¿½ï¿½ È£ï¿½ï¿½ï¿½ Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯
 
-	Stack_Traverse(HeadNode->Left);
+  Stack_Traverse(HeadNode->Left);
 }

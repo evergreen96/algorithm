@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#define MAX 100
+#define MAX 4
 #define TRUE 1
 #define FALSE 0
 
@@ -9,39 +9,34 @@ void MakeRandomNumber(void);
 void QuickSort(int data[], int, int);
 void DisplayBuffer(void);
 int IsNumberExit(int, int);
-int Buf[MAX];
+int Buf[MAX] = {3, 2, 7, 1};
+;
 
-// Á¤·ÄÇÒ µ¥ÀÌÅÍÀÇ ÃÊ±âÈ­
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
 void MakeRandomNumber(void)
 {
 	int i, Num;
 	i = 1;
 	srand((unsigned)time(NULL));
-	Buf[0] = 100;
-
-	while (i < MAX) {
-		Num = rand() % MAX;
-
-		if (!IsNumberExit(Num, i)) {
-			Buf[i] = Num;
-			i++;
-		}
-	}
 }
 
 void QuickSort(int data[], int left, int right)
 {
 	int num, i, j, temp;
-	if (right > left) {
+	if (right > left)
+	{
 		num = data[right];
 		i = left - 1;
 		j = right;
 
-		for (;;) {
-			while (data[++i] < num);
-			while (data[--j] > num);
-			if (i >= j)
-				break;
+		for (;;)
+		{
+			while (data[++i] < num)
+				;
+			while (data[--j] > num)
+
+				if (i >= j)
+					break;
 
 			temp = data[i];
 			data[i] = data[j];
@@ -61,7 +56,8 @@ void DisplayBuffer(void)
 {
 	int i;
 
-	for (i = 0; i < MAX; i++) {
+	for (i = 0; i < MAX; i++)
+	{
 		if ((i % 10) == 0)
 			printf("\n");
 
@@ -75,7 +71,8 @@ int IsNumberExit(int number, int index)
 {
 	int i;
 
-	for (i = 0; i < index; i++) {
+	for (i = 0; i < index; i++)
+	{
 		if (Buf[i] == number || number == 0)
 			return TRUE;
 	}
@@ -85,11 +82,11 @@ int IsNumberExit(int number, int index)
 
 void main()
 {
-	printf("Á¤·ÄÇÒ µ¥ÀÌÅÍ ÃÊ±âÈ­\n");
+	printf("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­\n");
 
 	MakeRandomNumber();
 	DisplayBuffer();
-	printf("Á¤·Ä ÈÄ µ¥ÀÌÅÍ\n");
+	printf("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\n");
 
 	QuickSort(Buf, 0, MAX - 1);
 	DisplayBuffer();

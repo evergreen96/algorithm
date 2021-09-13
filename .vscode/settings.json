@@ -1,6 +1,9 @@
 {
-    "C_Cpp.clang_format_fallbackStyle": "{ PointerAlignment: Left}",
     "files.associations": {
-        "iostream": "cpp"
-    }
+        "iosfwd": "cpp",
+        "iostream": "cpp",
+        "vector": "cpp",
+        "istream": "cpp"
+    },
+
 }

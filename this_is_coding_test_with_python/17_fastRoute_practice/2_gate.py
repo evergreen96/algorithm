@@ -28,3 +28,5 @@ for _ in range(p):
     if r==0:
         break
     union_parent(table, r, r-1)
+
+    

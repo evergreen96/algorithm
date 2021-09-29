@@ -30,6 +30,7 @@ def update_range(idx, left,right, start, end, value):
         update_range(idx*2, left,right, start, mid, value)
         update_range(idx*2+1, left, right, mid+1, end, value)
     
+    
     if tree[idx] !=0:
         seg[idx] = (end-start+1)
     else:

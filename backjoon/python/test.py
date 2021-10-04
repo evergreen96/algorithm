@@ -1,60 +1,49 @@
 import sys
-import math
-input=sys.stdin.readline
+input = sys.stdin.readline
 
-def init(arr,tree,start,end,node):
-   if start==end:
-      tree[node]=arr[start]
-   else:
-      mid = (start+end)//2
-      init(arr,tree,start,mid,node*2)
-      init(arr,tree,mid+1,end,node*2+1)
-      tree[node]=tree[node*2]+tree[node*2+1]
 
-def update_lazy(tree,lazy,node,start,end):
-   if lazy[node] !=0:
-      tree[node] += (end-start+1)*lazy[node]
-      if start!=end:
-         lazy[node*2]+=lazy[node]
-         lazy[node*2+1]+=lazy[node]
-      lazy[node]=0
+n = int(input())
 
-def update_range(tree,lazy,start,end,node,left,right,dif):
-   update_lazy(tree,lazy,node,start,end)
-   if left>end or start>right: return
+flag = False
+if n < 0:
+    n = -n
+    flag = True
 
-   if start>=left and right>=end:
-      tree[node]+=(end-start+1)*dif
-      if start!=end:
-         lazy[node*2]+=dif
-         lazy[node*2+1]+=dif
-      return
+arr = [0]*(n+1)
+arr[0] = '0'
+arr[1] = '1'
+arr[2] = '1T'
+arr[3] = '10'
 
-   mid = (start+end)//2
-   update_range(tree,lazy,start,mid,node*2,left,right,dif)
-   update_range(tree,lazy,mid+1,end,node*2+1,left,right,dif)
-   tree[node]=tree[node*2]+tree[node*2+1]
 
-def sum(tree,lazy,start,end,node,left,right):
-   update_lazy(tree,lazy,node,start,end)
-   if left>end or start>right:return 0
-   if start>=left and right>=end: return tree[node]
+up = n
+tmp = ''
+while up > 3:
+    re = up%3
+    up = up//3
+    if re == 2:
+        tmp ='T' + tmp
+        up += 1
+    else:
+        tmp =str(re) + tmp
+tmp = arr[up] + tmp
 
-   mid=(start+end)//2
-   return sum(tree,lazy,start,mid,node*2,left,right)+sum(tree,lazy,mid+1,end,node*2+1,left,right)
+        
+if not flag:
+    print(tmp)
+else:
+    p = ''
+    for v in tmp:
+        if v=='1':
+            p +='T'
+        elif v=='T':
+            p+='1'
+        else:
+            p +='0'
+    print(p)
 
-if __name__ == "__main__":
-   n,m,k=map(int,input().split())
-   arr=[int(input()) for _ in range(n)]
-   val=[list(map(int,input().split())) for _ in range(m+k)]
-   #tree_list=[0]*(pow(2,math.ceil(math.log(n,2))+1)-1)
-   tree_list=[0]*(n*4)
-   lazy=[0]*(n*4)
-   init(arr,tree_list,0,n-1,1)
-   for v in val:
-      b,c=v[1],v[2]
-      if v[0]==1: #b~c까지 d를 더함
-         d=v[3]
-         update_range(tree_list,lazy,0,n-1,1,b-1,c-1,d)
-      else:
-         print(sum(tree_list,lazy,0,n-1,1,b-1,c-1))
+
+"""
+3
+iabucdpefcg
+"""

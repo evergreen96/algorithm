@@ -1,11 +1,9 @@
-import sys
-n = int(input())
+import sys 
 
-table = [0]*10001
 
-for _ in range(n):
-    table[int(input())] += 1
+f = open('./test.txt', 'a')
 
-for i,v in enumerate(table):
-    for _ in range(v):
-        print(i)
+f.write('test')
+
+f.close()
+

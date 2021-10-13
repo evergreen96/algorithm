@@ -23,7 +23,7 @@ int main() {
         human_cnt++;
     }
   }
-  queue<pair<int, int>> q;
+  queue<pair<int, int> > q;
   int a, b;
   cin >> a >> b;
   visited[a - 1][b - 1] = 1;
